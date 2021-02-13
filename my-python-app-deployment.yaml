@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: my-python-app
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service
+  namespace: my-python-app
+spec:
+  selector:
+    app: my-python-app
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+      nodePort: 30000
+  type: NodePort  
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-demo
+  namespace: my-python-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-python-app
+  template:
+    metadata:
+      labels:
+        app: my-python-app
+    spec:
+      containers:
+      - name: my-python-app
+        image: stz13/my-python-app:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000

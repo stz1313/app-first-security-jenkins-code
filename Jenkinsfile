@@ -33,7 +33,7 @@ pipeline {
     }
     // Uncomment for SAST lab step 
     // Commented section starts
-    /*
+    
     stage('SAS Test') {
       steps {
         snykSecurity(
@@ -43,8 +43,8 @@ pipeline {
           failOnIssues: true)
       }
     }
-    */
     // Commented section ends 
+    
     stage('Build image') {
       steps{
         script {
