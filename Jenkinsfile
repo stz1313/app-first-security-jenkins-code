@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    registry = "stz13/my-cicd-app"
+    registry = "/my-cicd-app"
     registryCredential = 'dockerhub'
     dockerImage = ''
   }
@@ -8,7 +8,6 @@ pipeline {
     dockerfile true
   }
   stages {
-
     stage('Test App') {
       steps {
         sh 'python3 test.py'
